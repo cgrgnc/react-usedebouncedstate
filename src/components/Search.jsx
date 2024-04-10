@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDebouncedState } from "../hook/useDebouncedState";
 import "./Search.css";
@@ -36,18 +36,31 @@ export const Search = ({ data }) => {
 		data.toLowerCase().includes(search.toLowerCase()),
 	);
 	return (
-		<div>
-			<input
-				{...register("search-input")}
-				placeholder="Suchen ..."
-			/>
-			<ul className="result-list">
-				{filteredData.map((item, i) => (
-					<li key={i}>{item}</li>
-				))}
-			</ul>
-			<p>Gesamtzahl der Abfragen ohne useDebouncedState: {queryCount}</p>
-			<p>Gesamtzahl der Abfragen mit useDebouncedState: {queryCountDebounce}</p>
-		</div>
+		<React.Fragment>
+			<div className="search-box">
+				<div className="input-wrapper">
+					<input
+						{...register("search-input")}
+						placeholder="Suchen ..."
+						type="search"
+					/>
+				</div>
+				<ul className="result-list">
+					{filteredData.map((item, i) => (
+						<li key={i}>{item}</li>
+					))}
+				</ul>
+				<div className="text-wrapper">
+					<p>
+						Gesamtzahl der Abfragen ohne useDebouncedState:{" "}
+						<span className="counts-without">{queryCount}</span>
+					</p>
+					<p>
+						Gesamtzahl der Abfragen mit useDebouncedState:{" "}
+						<span className="counts-with">{queryCountDebounce}</span>
+					</p>
+				</div>
+			</div>
+		</React.Fragment>
 	);
 };
