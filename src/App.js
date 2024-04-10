@@ -1,8 +1,10 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { Search } from "./components/Search";
+import cities from "./data/cities.json";
 
 function App() {
-	return <div className="App">Hello World</div>;
+	const data = cities.cities;
+	return <div className="App">{<Search data={data} />}</div>;
 }
 
 export default App;
